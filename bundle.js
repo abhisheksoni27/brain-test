@@ -33,7 +33,7 @@ const data = [{
   input: [
     1, 1
   ],
-  output: [0]
+  output: [1]
 }];
 require('brain.js');
 require('gpu.js');
@@ -126,8 +126,9 @@ gpu = new GPU({
 // // const end = new Date().getTime();
 // // console.log(end - start + 'ms')
 
-net = new brain.NeuralNetworkGPU();
-net.train(data, {log:true});
+net = new brain.NeuralNetwork();
+const error = net.train(data, {log:true});
+console.log(error);
 console.log(net.error);
 // for(let i = 0; i<data.length; i++){
   // console.log(Math.round(net.run(data[i].input)));
@@ -549,7 +550,7 @@ var NeuralNetworkGPU = function () {
     this.errors = null;
     this.count = 0;
     this.error = 1;
-    this.logCount = 200;
+    this.logCount = 50;
     this.gpu = new _gpu2.default({ mode: 'gpu' });
   }
 
@@ -649,7 +650,7 @@ var NeuralNetworkGPU = function () {
 
       var error = 1;
       var i = void 0;
-      for (i = 1; i < iterations && error > errorThresh; i++) {
+      for (i = 1; i < 5000 && error > errorThresh; i++) {
         this.count++;
         var sum = 0;
         for (var j = 0; j < data.length; j++) {

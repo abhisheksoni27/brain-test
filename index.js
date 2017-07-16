@@ -17,7 +17,7 @@ const data = [{
   input: [
     1, 1
   ],
-  output: [0]
+  output: [1]
 }];
 require('brain.js');
 require('gpu.js');
@@ -110,8 +110,9 @@ gpu = new GPU({
 // // const end = new Date().getTime();
 // // console.log(end - start + 'ms')
 
-net = new brain.NeuralNetworkGPU();
-net.train(data, {log:true});
+net = new brain.NeuralNetwork();
+const error = net.train(data, {log:true});
+console.log(error);
 console.log(net.error);
 // for(let i = 0; i<data.length; i++){
   // console.log(Math.round(net.run(data[i].input)));
