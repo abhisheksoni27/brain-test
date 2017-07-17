@@ -812,6 +812,10 @@ minimist@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.0.tgz#a35008b20f41383eec1fb914f4cd5df79a264284"
 
+mnist@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/mnist/-/mnist-1.0.5.tgz#18c8f965914dfd80274bde8685acfb6522bded61"
+
 module-deps@^4.0.8:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/module-deps/-/module-deps-4.1.1.tgz#23215833f1da13fd606ccb8087b44852dcb821fd"

@@ -109,17 +109,23 @@ gpu = new GPU({
 // // const result = matMult(A, B);
 // // const end = new Date().getTime();
 // // console.log(end - start + 'ms')
+const mnist = require('mnist');
 
 const start = new Date();
+
 net = new brain.NeuralNetworkGPU();
-const error = net.train(data, {log:true});
-console.log(error);
-console.log(net.error);
+
+const set = mnist.set(1000, 1);
+const trainingSet = set.training;
+net.train(trainingSet, {
+  log: true
+}); 
+
 const end = new Date();
 
 console.log(end - start);
 // for(let i = 0; i<data.length; i++){
-  // console.log(Math.round(net.run(data[i].input)));
+// console.log(Math.round(net.run(data[i].input)));
 // }
 
 // // // const A = [1, 2, 3, 4, 5];
@@ -154,7 +160,7 @@ console.log(end - start);
 // })
 //   .setDimensions([200, 200])
 //   .setGraphical(true);
-    
+
 // render();
 
 // const canvas = render.getCanvas();

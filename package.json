@@ -12,6 +12,7 @@
   "dependencies": {
     "browserify": "^14.4.0",
     "browserify-livereload": "^1.0.10",
-    "express": "^4.15.3"
+    "express": "^4.15.3",
+    "mnist": "^1.0.5"
   }
 }
