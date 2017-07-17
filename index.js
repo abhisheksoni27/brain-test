@@ -110,10 +110,14 @@ gpu = new GPU({
 // // const end = new Date().getTime();
 // // console.log(end - start + 'ms')
 
-net = new brain.NeuralNetwork();
+const start = new Date();
+net = new brain.NeuralNetworkGPU();
 const error = net.train(data, {log:true});
 console.log(error);
 console.log(net.error);
+const end = new Date();
+
+console.log(end - start);
 // for(let i = 0; i<data.length; i++){
   // console.log(Math.round(net.run(data[i].input)));
 // }
