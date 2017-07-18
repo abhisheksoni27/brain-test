@@ -13,6 +13,7 @@
     "browserify": "^14.4.0",
     "browserify-livereload": "^1.0.10",
     "express": "^4.15.3",
+    "js-datasets-iris": "^1.0.4",
     "mnist": "^1.0.5"
   }
 }

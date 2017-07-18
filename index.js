@@ -1,26 +1,27 @@
-const data = [{
-  input: [
-    0, 0
-  ],
-  output: [0]
-}, {
-  input: [
-    0, 1
-  ],
-  output: [1]
-}, {
-  input: [
-    1, 0
-  ],
-  output: [1]
-}, {
-  input: [
-    1, 1
-  ],
-  output: [1]
-}];
+// const data = [{
+//   input: [
+//     0, 0
+//   ],
+//   output: [0]
+// }, {
+//   input: [
+//     0, 1
+//   ],
+//   output: [1]
+// }, {
+//   input: [
+//     1, 0
+//   ],
+//   output: [1]
+// }, {
+//   input: [
+//     1, 1
+//   ],
+//   output: [1]
+// }];
 require('brain.js');
 require('gpu.js');
+const iris = require('js-datasets-iris');
 
 // // // var canvas = document.createElement('canvas');
 
@@ -109,21 +110,57 @@ gpu = new GPU({
 // // const result = matMult(A, B);
 // // const end = new Date().getTime();
 // // console.log(end - start + 'ms')
-const mnist = require('mnist');
+
+
+
+iris.shuffle();
+
+const data = iris.data;
+let trainingSet = [];
+
+function dressData() {
+  data.forEach(row => {
+    trainingSet.push({
+      input: row.slice(0, 4),
+      output: row.slice(4)
+    });
+  });
+}
+
+function mapStringClassesToNumber() {
+  let names = new Set();
+
+  trainingSet.forEach(row => {
+    names.add(row.output[0]);
+  });
+
+  names = [...names];
+
+  trainingSet = trainingSet.map(row => {
+    let index = names.indexOf(row.output[0]);
+    row.output = [0, 0, 0];
+    row.output[index] = 1;
+    return row;
+  });
+}
+
+dressData();
+mapStringClassesToNumber();
 
 const start = new Date();
 
-net = new brain.NeuralNetworkGPU();
+const net = new brain.NeuralNetworkGPU({
+  mode: 'gpu',
+  logCount: 1
+});
 
-const set = mnist.set(1000, 1);
-const trainingSet = set.training;
 net.train(trainingSet, {
-  log: true
-}); 
+  log: true,
+});
 
 const end = new Date();
-
 console.log(end - start);
+console.log(net.sizes);
 // for(let i = 0; i<data.length; i++){
 // console.log(Math.round(net.run(data[i].input)));
 // }
